@@ -1,4 +1,5 @@
 Fiber = Npm.require 'fibers'
+Future = Npm.require 'fibers/future'
 
 Meteor.startup ->
   UploadServer.init
@@ -10,14 +11,14 @@ Meteor.startup ->
     validateFile: (file) ->
       return null
     getDirectory: (fileInfo, formData) ->
-      console.log '>>>> getDirectory'
       dir = ''
-      Fiber( ->
-        u = Meteor.users.findOne({"uploadToken.token": formData.uploadToken.token })
-        if u
-          dir = u.username
-      ).run()
-      console.log '[token,dir]:[', formData.uploadToken,',', dir,']'
+      u = Meteor.users.findOne({"uploadToken.token": formData.uploadToken })
+      if u
+        dir = u.username
+      else
+        # throw an exception?
+        dir = '__trash__'
+
       return dir
     getFileName: (fileInfo, formData) ->
       return fileInfo.name

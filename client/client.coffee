@@ -11,7 +11,12 @@ Template.manageUsersImport.onCreated ->
 
 
 Template.manageUsersImport.helpers
-  getFormData: ->
-    return { uploadToken: Template.instance().uploadToken.get() }
-#    console.log Template.instance().uploadToken.get()
-#    return { uploadToken: 'ciao' }
+  callbacks: ->
+    instance = Template.instance()
+    return {
+      getDynamicFormData: ->
+        return {
+          uploadToken: instance.uploadToken.get()
+          ciao: 'miao'
+        }
+    }

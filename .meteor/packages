@@ -6,11 +6,13 @@
 
 meteor-platform
 insecure
-tomi:upload-server
-tomi:upload-jquery
 accounts-base
 accounts-password
 twbs:bootstrap
 reactive-var
 accounts-ui
 coffeescript
+
+
+gly:upload-jquery@2.1.8
+gly:upload-server@1.2.10
